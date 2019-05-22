@@ -29,7 +29,7 @@
 ;; turn on font-lock mode
 (global-font-lock-mode)
 
-(require 'wpdl-mode)
+;; (require 'wpdl-mode)
 ;; (require 'mercury-mode)
 
 ;; enable visual feedback on selections
