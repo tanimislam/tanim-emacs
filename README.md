@@ -1,6 +1,6 @@
 # tanim-emacs: my own customizations
 
-Hello World! Here I have a grab-bag of `elisp` files I need to get my [emacs](https://www.emacs.org) environment to look as nice as I want it to.
+Hello World! Here I have a grab-bag of `elisp` files I need to get my [emacs](https://www.gnu.org/software/emacs/) environment to look as nice as I want it to.
 
 This repository should live in a `~/.xemacs` directory. The easiest way to do this is to run the command,
 ```bash
