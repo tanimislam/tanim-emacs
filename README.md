@@ -6,7 +6,7 @@ This repository should live in a `~/.xemacs` directory. The easiest way to do th
 ```bash
 git clone https://tanim_islam@bitbucket.org/tanim_islam/tanim-emacs.git .xemacs
 ```
-All in your home directory.
+All in your home directory.``
 
 Second, you should have a `~/.emacs` file, which should look like this.
 ```elisp
