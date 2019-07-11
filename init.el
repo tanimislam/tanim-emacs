@@ -3,7 +3,8 @@
 ;; add in the packages
 (require 'package)
 (add-to-list 'package-archives
-             '("melpa" . "https://melpa.org/packages/"))
+             '("melpa" . "https://melpa.org/packages/")
+	     '("gnu" . "https://elpa.gnu.org/packages/"))
 (package-initialize)
 
 ;; now add these packages if not found
@@ -19,6 +20,7 @@
 	matlab-mode
 	web-mode
 	exec-path-from-shell
+	sphinx-doc
 	))
 ;; refresh package list if it is not already available
 (when (not package-archive-contents)
@@ -191,6 +193,8 @@
 ;; Python Hook
 (add-hook 'python-mode-hook
           (lambda ( )
+	    (require 'sphinx-doc)
+	    (sphinx-doc-mode t)
 	    (setq indent-tabs-mode nil)
 	    (setq tab-width 2)))
 (add-hook 'python-mode-hook 'jedi:setup )
