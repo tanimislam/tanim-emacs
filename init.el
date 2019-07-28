@@ -193,12 +193,18 @@
 ;; Python Hook
 (add-hook 'python-mode-hook
           (lambda ( )
+	    (visual-line-mode t)
 	    (require 'sphinx-doc)
 	    (sphinx-doc-mode t)
 	    (setq indent-tabs-mode nil)
 	    (setq tab-width 2)))
 (add-hook 'python-mode-hook 'jedi:setup )
 (put 'downcase-region 'disabled nil)
+
+;; restructured text mode hook
+(add-hook 'rst-mode-hook
+	  (lambda ( )
+	    (visual-line-mode t)))
 
 ;; inherit in the $PATH from the shell
 (exec-path-from-shell-initialize)
