@@ -8,29 +8,30 @@
 (package-initialize)
 
 ;; now add these packages if not found
-(setq pfl-packages
-      '(
-	systemd
-	magit
-	auctex
-	markdown-mode
-	dracula-theme
-	tramp
-	jedi
-	matlab-mode
-	web-mode
-	exec-path-from-shell
-	sphinx-doc
-	))
+;; (setq pfl-packages
+;;       '(
+;; 	systemd
+;; 	magit
+;; 	auctex
+;; 	markdown-mode
+;; 	dracula-theme
+;; 	tramp
+;; 	jedi
+;; 	matlab-mode
+;; 	web-mode
+;; 	exec-path-from-shell
+;; 	sphinx-doc
+;; 	sphinx-mode
+;;	))
 ;; refresh package list if it is not already available
-(when (not package-archive-contents)
-  (package-refresh-contents))
+;; (when (not package-archive-contents)
+;;  (package-refresh-contents))
 
 ;; install packages from the list that are not yet installed
-(dolist (pkg pfl-packages)
-  (when (and (not (package-installed-p pkg))
-	     (assoc pkg package-archive-contents))
-        (package-install pkg)))
+;(dolist (pkg pfl-packages)
+;  (when (and (not (package-installed-p pkg))
+;	     (assoc pkg package-archive-contents))
+;        (package-install pkg)))
 
 ;;; uncomment this line to disable loading of "default.el" at startup
 (setq inhibit-default-init t)
@@ -65,6 +66,12 @@
 ;; turn on font-lock mode
 (global-font-lock-mode)
 
+;; visual line mode (smart wrap) on by default
+(visual-line-mode)
+
+;; add .bash_aliases to mode
+(add-to-list 'auto-mode-alist '("\\.bash_aliases\\'" . sh-mode ) )
+
 ;; (require 'wpdl-mode)
 (require 'mercury-mode)
 (add-to-list 'auto-mode-alist '("\\.inp\\'" . mercury-mode ) )
@@ -77,10 +84,10 @@
 (autoload 'awk-mode "cc-mode" nil t)
 
 ;; autoload matlab-mode
-(require 'matlab)
-(autoload 'matlab-mode "matlab" "Enter matlab mode." t)
-(add-to-list 'auto-mode-alist '("\\.m\\'" . matlab-mode ) )
-(autoload 'matlab-shell "matlab" "Interactive Matlab mode." t)
+;(require 'matlab)
+;(autoload 'matlab-mode "matlab" "Enter matlab mode." t)
+;(add-to-list 'auto-mode-alist '("\\.m\\'" . matlab-mode ) )
+;(autoload 'matlab-shell "matlab" "Interactive Matlab mode." t)
 
 ;; systemd-mode
 (require 'systemd)
@@ -195,10 +202,18 @@
           (lambda ( )
 	    (require 'sphinx-doc)
 	    (sphinx-doc-mode t)
+	    (visual-line-mode)
+	    (setq python-indent-offset 2)
 	    (setq indent-tabs-mode nil)
 	    (setq tab-width 2)))
 (add-hook 'python-mode-hook 'jedi:setup )
 (put 'downcase-region 'disabled nil)
 
+;; ReST mode hook
+(add-hook 'rst-mode-hook
+	  (lambda ( )
+	    (require 'sphinx-mode)
+	    (visual-line-mode)))
+	    
 ;; inherit in the $PATH from the shell
 (exec-path-from-shell-initialize)
