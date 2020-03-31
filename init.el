@@ -210,19 +210,12 @@
 (add-hook 'python-mode-hook 'jedi:setup )
 (put 'downcase-region 'disabled nil)
 
-<<<<<<< HEAD
 ;; ReST mode hook
 (add-hook 'rst-mode-hook
 	  (lambda ( )
 	    (require 'sphinx-mode)
 	    (visual-line-mode)))
 	    
-=======
-;; restructured text mode hook
-(add-hook 'rst-mode-hook
-	  (lambda ( )
-	    (visual-line-mode t)))
 
->>>>>>> 6b55582b1c1dbc8e751ffc6b85a7d2027535801a
 ;; inherit in the $PATH from the shell
 (exec-path-from-shell-initialize)
