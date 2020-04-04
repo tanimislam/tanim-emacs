@@ -5,7 +5,7 @@
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
    (quote
-    (tramp-term yaml-mode web-mode validate systemd swift-mode sphinx-mode sphinx-doc solarized-theme nginx-mode matlab-mode markdown-mode magit lush-theme latex-pretty-symbols json-mode js2-mode jedi git exec-path-from-shell evalator ess dracula-theme crontab-mode color-theme-solarized color-theme-sanityinc-solarized cmake-mode auctex apt-sources-list anti-zenburn-theme))))
+    (nginx-mode polymode sphinx-mode sphinx-doc systemd markdown-mode exec-path-from-shell zenburn-theme web-mode web-beautify tramp-theme solarized-theme rust-mode matlab-mode magit lush-theme lua-mode latex-unicode-math-mode latex-math-preview jedi jammer exwm egg dracula-theme cycle-themes beacon auctex ace-window ace-jump-mode ace-jump-helm-line ace-flyspell))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
