@@ -5,7 +5,8 @@
 (add-to-list 'package-archives
              '("melpa" . "https://melpa.org/packages/")
 	     '("gnu" . "https://elpa.gnu.org/packages/"))
-(package-initialize)
+(package-refresh-contents)
+(package-initialize) ;; takes too long
 
 ;; now add these packages if not found
 (setq pfl-packages
@@ -21,6 +22,7 @@
 	web-mode
 	exec-path-from-shell
 	sphinx-doc
+	sphinx-mode
 	))
 ;; refresh package list if it is not already available
 (when (not package-archive-contents)
@@ -66,8 +68,16 @@
 (global-font-lock-mode)
 
 ;; (require 'wpdl-mode)
+;; mercury mode
 (require 'mercury-mode)
 (add-to-list 'auto-mode-alist '("\\.inp\\'" . mercury-mode ) )
+
+;; R-modes
+(require 'ess-mode)
+
+;; fucking pop-win
+(require 'popwin)
+(popwin-mode -1)
 
 ;; enable visual feedback on selections
 (setq transient-mark-mode t)
@@ -108,6 +118,12 @@
   (setq web-mode-markup-indent-offset 2)
   (setq web-mode-css-indent-offset 2) )
 (add-hook 'web-mode-hook 'my-web-mode-hook )
+
+;; default set up visual line mode
+(visual-line-mode)
+
+;; bash_aliases should be in sh-mode
+(add-to-list 'auto-mode-alist '("\\.bash_aliases\\'" . sh-mode))
 
 ;; swig-mode
 (require 'swig-mode)
@@ -195,10 +211,20 @@
           (lambda ( )
 	    (require 'sphinx-doc)
 	    (sphinx-doc-mode t)
+	    (visual-line-mode)
+	    (setq python-indent-offset 2)
 	    (setq indent-tabs-mode nil)
 	    (setq tab-width 2)))
 (add-hook 'python-mode-hook 'jedi:setup )
 (put 'downcase-region 'disabled nil)
+
+;; Restructed Text Mode Hooks
+(add-hook 'rst-mode-hook
+	  (lambda ( )
+	    (require 'sphinx-mode)
+	    (sphinx-mode t)
+	    (column-number-mode)
+	    (visual-line-mode) ) )
 
 ;; inherit in the $PATH from the shell
 (exec-path-from-shell-initialize)
