@@ -154,7 +154,7 @@
 	    ;; using kile
 	    (define-key LaTeX-mode-map (kbd "C-S-<f6>")
 	      (lambda ()
-	    	(interactive)
+    	(interactive)
 	    	(TeX-command-menu "LaTeX")))
 	    (define-key LaTeX-mode-map (kbd "C-S-<f5>")
 	      (lambda ()
@@ -207,8 +207,8 @@
 (load-theme 'dracula t)
 
 ;; ares-mode
-;; (require 'ares-mode)
-;; (add-to-list 'auto-mode-alist '("\\.ares$" . ares-mode))
+(require 'ares-mode)
+(add-to-list 'auto-mode-alist '("\\.ares$" . ares-mode))
 
 ;; python jedi setup
 
