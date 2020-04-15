@@ -3,8 +3,8 @@
 ;; add in the packages
 (require 'package)
 (add-to-list 'package-archives
-             '("melpa" . "http://melpa.org/packages/")
-	     '("gnu" . "http://elpa.gnu.org/packages/"))
+             '("melpa" . "https://melpa.org/packages/")
+	     '("gnu" . "https://elpa.gnu.org/packages/") tcc)
 (package-refresh-contents)
 (package-initialize) ;; takes too long
 
@@ -70,6 +70,9 @@
 ;; visual line mode (smart wrap) on by default
 (visual-line-mode)
 
+;; no temporary files, following http://ergoemacs.org/emacs/emacs_set_backup_into_a_directory.html
+(setq make-backup-files nil)
+
 ;; add .bash_aliases to mode
 (add-to-list 'auto-mode-alist '("\\.bash_aliases\\'" . sh-mode ) )
 
@@ -107,7 +110,6 @@
 (add-to-list 'auto-mode-alist '("\\.css\\'" . css-mode ) )
 (add-to-list 'auto-mode-alist '("\\.qss\\'" . css-mode ) )
 (setq cssm-indent-function 'cssm-c-style-indenter)
-
 
 ;; web-mode
 (require 'web-mode)
