@@ -3,10 +3,10 @@
 ;; add in the packages
 (require 'package)
 (add-to-list 'package-archives
-             '("melpa" . "https://melpa.org/packages/")
-	     '("gnu" . "https://elpa.gnu.org/packages/"))
+             '("melpa" . "http://melpa.org/packages/")
+	     '("gnu" . "http://elpa.gnu.org/packages/"))
 (package-refresh-contents)
-; (package-initialize) ;; takes too long
+(package-initialize) ;; takes too long
 
 ;; now add these packages if not found
 (setq pfl-packages
