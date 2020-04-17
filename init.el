@@ -4,13 +4,14 @@
 (require 'package)
 (add-to-list 'package-archives
              '("melpa" . "https://melpa.org/packages/")
-	     '("gnu" . "https://elpa.gnu.org/packages/") tcc)
+	     '("gnu" . "https://elpa.gnu.org/packages/"))
 (package-refresh-contents)
 (package-initialize) ;; takes too long
 
 ;; now add these packages if not found
 (setq pfl-packages
       '(
+	ess
 	systemd
 	magit
 	auctex
@@ -66,9 +67,6 @@
 
 ;; turn on font-lock mode
 (global-font-lock-mode)
-
-;; visual line mode (smart wrap) on by default
-(visual-line-mode)
 
 ;; no temporary files, following http://ergoemacs.org/emacs/emacs_set_backup_into_a_directory.html
 (setq make-backup-files nil)
@@ -127,8 +125,10 @@
   (setq web-mode-css-indent-offset 2) )
 (add-hook 'web-mode-hook 'my-web-mode-hook )
 
-;; default set up visual line mode
-(visual-line-mode)
+(add-hook 'emacs-lisp-mode-hook
+	  (lambda ()
+	    (visual-line-mode)))
+
 
 ;; bash_aliases should be in sh-mode
 (add-to-list 'auto-mode-alist '("\\.bash_aliases\\'" . sh-mode))
