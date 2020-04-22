@@ -4,7 +4,7 @@
 (require 'package)
 (add-to-list 'package-archives
              '("melpa" . "https://melpa.org/packages/")
-	     '("gnu" . "https://elpa.gnu.org/packages/") tcc)
+	     '("gnu" . "https://elpa.gnu.org/packages/"))
 (package-refresh-contents)
 (package-initialize) ;; takes too long
 
@@ -226,6 +226,11 @@
 	    (setq tab-width 2)))
 (add-hook 'python-mode-hook 'jedi:setup )
 (put 'downcase-region 'disabled nil)
+
+;; Markdown hook
+(add-hook 'markdown-mode-hook
+	  (lambda ( )
+	    (visual-linemode)))
 
 ;; Restructed Text Mode Hooks
 (add-hook 'rst-mode-hook
