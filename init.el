@@ -35,6 +35,13 @@
 	     (assoc pkg package-archive-contents))
     (package-install pkg)))
 
+;; from https://stackoverflow.com/a/26776276
+;; mapping mac os X key commands
+;; home -> beginning-of-line
+;; end  -> end-of-line
+(global-set-key [home] 'move-beginning-of-line)
+(global-set-key [end] 'move-end-of-line)
+
 ;;; uncomment this line to disable loading of "default.el" at startup
 (setq inhibit-default-init t)
 
@@ -215,16 +222,17 @@
 ;; python jedi setup
 
 ;; Python Hook
+(setq python-indent-guess-indent-offset nil)
 (add-hook 'python-mode-hook
           (lambda ( )
 	    (visual-line-mode t)
 	    (require 'sphinx-doc)
 	    (sphinx-doc-mode t)
 	    (visual-line-mode)
-	    (setq python-indent-offset 2)
+	    (setq python-indent-offset 0)
 	    (setq indent-tabs-mode nil)
 	    (setq tab-width 2)))
-(add-hook 'python-mode-hook 'jedi:setup )
+;; (add-hook 'python-mode-hook 'jedi:setup )
 (put 'downcase-region 'disabled nil)
 
 ;; Markdown hook
