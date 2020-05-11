@@ -265,3 +265,16 @@
 
 ;;It is necessary to perform an update!
 (jka-compr-update)
+
+;; from
+;; https://stackoverflow.com/questions/350526/how-do-i-count-the-number-of-open-buffers-files-in-emacs
+;; automatically restore buffers on restart. May or may not work.
+(desktop-save-mode 1)
+
+
+(setq remote-file-name-inhibit-cache nil)
+(setq vc-ignore-dir-regexp
+      (format "%s\\|%s"
+	      vc-ignore-dir-regexp
+	      tramp-file-name-regexp))
+(setq tramp-verbose 1)
