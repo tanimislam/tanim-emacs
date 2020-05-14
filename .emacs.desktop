@@ -1,0 +1,31 @@
+;; -*- mode: emacs-lisp; coding: emacs-mule; -*-
+;; --------------------------------------------------------------------------
+;; Desktop File for Emacs
+;; --------------------------------------------------------------------------
+;; Created Wed May 13 17:09:33 2020
+;; Desktop file format version 208
+;; Emacs version 26.3
+
+;; Global section:
+(setq desktop-saved-frameset [frameset 1 (24252 35901 899012 0) (desktop . "208") "islam5@cosmicfury.llnl.gov" nil nil ((((minibuffer . t) (tty-type . "xterm-256color") (tty . "/dev/tty") (display-type . color) (background-mode . light) (foreground-color . "#ffffff") (cursor-color . "#c6c6c6") (background-color . "unspecified-bg") (font . "tty") (height . 51) (width . 204) (modeline . t) (unsplittable) (menu-bar-lines . 1) (frameset--id . "792D-2A3C-2D6E-EFFC") (frameset--mini t)) ((min-height . 4) (min-width . 10) (min-height-ignore . 2) (min-width-ignore . 2) (min-height-safe . 1) (min-width-safe . 2) (min-pixel-height . 4) (min-pixel-width . 10) (min-pixel-height-ignore . 2) (min-pixel-width-ignore . 2) (min-pixel-height-safe . 1) (min-pixel-width-safe . 2)) leaf (pixel-width . 204) (pixel-height . 50) (total-width . 204) (total-height . 50) (normal-height . 1.0) (normal-width . 1.0) (buffer "init.el" (selected . t) (hscroll . 0) (fringes 0 0 nil) (margins nil) (scroll-bars nil 0 t nil 0 t) (vscroll . 0) (dedicated) (point . 833) (start . 1))))])
+(setq desktop-missing-file-warning nil)
+(setq tags-file-name nil)
+(setq tags-table-list nil)
+(setq search-ring nil)
+(setq regexp-search-ring nil)
+(setq register-alist nil)
+(setq file-name-history '("~/.xemacs/" "~/.xemacs/init.el"))
+
+;; Buffer section -- buffers listed in same order as in buffer list:
+(desktop-create-buffer 208
+  "/Users/islam5/.xemacs/init.el"
+  "init.el"
+  'emacs-lisp-mode
+  '(auto-fill-mode visual-line-mode eldoc-mode TeX-PDF-mode)
+  833
+  '(nil nil)
+  nil
+  nil
+  '((buffer-display-time 24252 35900 272789 0) (buffer-file-coding-system . prefer-utf-8-unix) (truncate-lines))
+  '((mark-ring nil)))
+

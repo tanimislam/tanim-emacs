@@ -1,39 +1,29 @@
 ;; .emacs
 
 ;; add in the packages
+;; cargo cult from https://melpa.org/#/getting-started
 (require 'package)
+(let* ((no-ssl (and (memq system-type '(windows-nt ms-dos))
+                    (not (gnutls-available-p))))
+       (proto (if no-ssl "http" "https")))
+  (when no-ssl (warn "\
+Your version of Emacs does not support SSL connections,
+which is unsafe because it allows man-in-the-middle attacks.
+There are two things you can do about this warning:
+1. Install an Emacs version that does support SSL and be safe.
+2. Remove this warning from your init file so you won't see it again."))
+  (add-to-list 'package-archives (cons "melpa" (concat proto "://melpa.org/packages/")) t)
+  ;; Comment/uncomment this line to enable MELPA Stable if desired.  See `package-archive-priorities`
+  ;; and `package-pinned-packages`. Most users will not need or want to do this.
+  ;;(add-to-list 'package-archives (cons "melpa-stable" (concat proto "://stable.melpa.org/packages/")) t)
+  )
+(package-initialize)
+
+;; cargo cult #2, also from https://melpa.org/#/getting-started
+;; also, emacs has REAL problems with https, so use http URLs if at all possible
 (add-to-list 'package-archives
-             '("melpa" . "https://stable.melpa.org/packages/")
-	     '("gnu" . "https://elpa.gnu.org/packages/"))
-(package-refresh-contents)
-(package-initialize) ;; takes too long
-
-;; now add these packages if not found
-(setq pfl-packages
-      '(
-	ess
-	systemd
-	magit
-	auctex
-	markdown-mode
-	dracula-theme
-	tramp
-	jedi
-	matlab-mode
-	web-mode
-	exec-path-from-shell
-	sphinx-doc
-	sphinx-mode
-	))
-;; refresh package list if it is not already available
-(when (not package-archive-contents)
-  (package-refresh-contents))
-
-;; install packages from the list that are not yet installed
-(dolist (pkg pfl-packages)
-  (when (and (not (package-installed-p pkg))
-	     (assoc pkg package-archive-contents))
-    (package-install pkg)))
+             '("melpa-stable" . "http://stable.melpa.org/packages/") t)
+;;(package-refresh-contents)
 
 ;; from https://stackoverflow.com/a/26776276
 ;; mapping mac os X key commands
@@ -68,6 +58,7 @@
 ;; add elisp to path
 (add-to-list 'load-path "~/.xemacs")
 (add-to-list 'load-path "~/.xemacs/elisp")
+(add-to-list 'load-path "~/.xemacs/share/emacs/site-lisp/ess")
 
 ;; column-number-mode
 (setq column-number-mode t)
@@ -86,8 +77,8 @@
 (require 'mercury-mode)
 (add-to-list 'auto-mode-alist '("\\.inp\\'" . mercury-mode ) )
 
-;; R-modes
-(require 'ess-mode)
+;; R-modes, not working now, don't know when it will work again
+(require 'ess-site)
 
 ;; fucking pop-win
 (require 'popwin)
@@ -232,7 +223,7 @@
 	    (setq python-indent-offset 0)
 	    (setq indent-tabs-mode nil)
 	    (setq tab-width 2)))
-;; (add-hook 'python-mode-hook 'jedi:setup )
+(add-hook 'python-mode-hook 'jedi:setup )
 (put 'downcase-region 'disabled nil)
 
 ;; Markdown hook
