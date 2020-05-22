@@ -68,6 +68,24 @@ There are two things you can do about this warning:
 ;; no temporary files, following http://ergoemacs.org/emacs/emacs_set_backup_into_a_directory.html
 (setq make-backup-files nil)
 
+;; now setting up display to the following
+(mouse-wheel-mode 1)
+
+;; from https://stackoverflow.com/questions/350526/how-do-i-count-the-number-of-open-buffers-files-in-emacs
+;; automatically restore buffers on restart. May or may not work.
+(desktop-save-mode 1)
+
+
+;; fucking pop-win
+;(require 'popwin)
+;(popwin-mode -1)
+
+;; enable visual feedback on selections
+;(setq transient-mark-mode t)
+;(setq backup-inhibited t)
+
+;;;;;; MODE SPECIFIC CHANGES ;;;;;;
+
 ;; add .bash_aliases to mode
 (add-to-list 'auto-mode-alist '("\\.bash_aliases\\'" . sh-mode ) )
 
@@ -79,28 +97,11 @@ There are two things you can do about this warning:
 ;; R-modes, not working now, don't know when it will work again
 (require 'ess-site)
 
-;; fucking pop-win
-(require 'popwin)
-(popwin-mode -1)
-
-;; enable visual feedback on selections
-(setq transient-mark-mode t)
-(setq backup-inhibited t)
-
-;; now auto-load the following
-(autoload 'awk-mode "cc-mode" nil t)
-
-;; autoload matlab-mode
-(require 'matlab)
-(autoload 'matlab-mode "matlab" "Enter matlab mode." t)
-(add-to-list 'auto-mode-alist '("\\.m\\'" . matlab-mode ) )
-(autoload 'matlab-shell "matlab" "Interactive Matlab mode." t)
-
 ;; systemd-mode
 (require 'systemd)
 (add-to-list 'auto-mode-alist '("\\.service\\'" . systemd-mode))
 
-;; now load up css-mode
+;; css-mode
 (autoload 'css-mode "css-mode")
 (add-to-list 'auto-mode-alist '("\\.css\\'" . css-mode ) )
 (add-to-list 'auto-mode-alist '("\\.qss\\'" . css-mode ) )
@@ -116,23 +117,17 @@ There are two things you can do about this warning:
 (add-to-list 'auto-mode-alist '("\\.mustache\\'" . web-mode))
 (add-to-list 'auto-mode-alist '("\\.djhtml\\'" . web-mode))
 (add-to-list 'auto-mode-alist '("\\.[cq]ss\\'" . web-mode))
-(defun my-web-mode-hook ()
-  "Hooks for web-mode"
-  (setq web-mode-markup-indent-offset 2)
-  (setq web-mode-css-indent-offset 2) )
-(add-hook 'web-mode-hook 'my-web-mode-hook )
+(add-hook 'web-mode-hook
+	  (lambda ( )
+	    "Hooks for web-mode"
+	    (setq web-mode-markup-indent-offset 2)
+	    (setq web-mode-css-indent-offset 2) ) )
 
+;; emacs-lisp mode
 (add-hook 'emacs-lisp-mode-hook
 	  (lambda ()
 	    (visual-line-mode)))
-
-;; swig-mode
-(require 'swig-mode)
-(add-to-list 'auto-mode-alist '("\\.sw\\'" . swig-mode))
-
-;; now setting up display to the following
-(mouse-wheel-mode 1)
-
+	    
 ;; make LaTeX act more like what I was used to in KILE
 (require 'tex )
 (add-hook 'LaTeX-mode-hook
@@ -161,21 +156,7 @@ There are two things you can do about this warning:
 	    	(interactive)
 	     	(TeX-command-menu "Index")))))
 
-;; (with-eval-after-load "latex"
-;;   '(progn
-;;      (define-key LaTeX-mode-map (kbd "C-S-<f6>")
-;;        (lambda ()
-;; 	 (interactive)
-;; 	 (TeX-command-menu "LaTeX")))
-;;      (define-key LaTeX-mode-map (kbd "C-S-<f5>")
-;;        (lambda ()
-;; 	 (interactive)
-;; 	 (TeX-command-menu "BibTeX")))
-;;      (define-key LaTeX-mode-map (kbd "C-^")
-;;        (lambda ()
-;; 	 (interactive)
-;; 	 (TeX-command-menu "Index")))))
-
+;; maybe someone can help me with adding cref and Cref to TeX-add-style-hook
 (eval-after-load "tex"
   '(progn
      (TeX-add-style-hook
@@ -187,22 +168,9 @@ There are two things you can do about this warning:
 	 'reference))
       :latex )))
 
-(add-hook 'emacs-lisp-mode-hook 'turn-on-auto-fill)
-(put 'upcase-region 'disabled nil)
-
-;; SPELLING
-;; brew install apsell
-(setq ispell-program-name "/usr/bin/aspell")
-
-
-;; dracula
-(load-theme 'dracula t)
-
 ;; ares-mode
 (require 'ares-mode)
 (add-to-list 'auto-mode-alist '("\\.ares$" . ares-mode))
-
-;; python jedi setup
 
 ;; Python Hook
 (setq python-indent-guess-indent-offset nil)
@@ -212,52 +180,14 @@ There are two things you can do about this warning:
 	    (require 'sphinx-doc)
 	    (sphinx-doc-mode t)
 	    (visual-line-mode)
-	    (setq python-indent-offset 0)
+	    (setq python-indent-offset 2)
 	    (setq indent-tabs-mode nil)
 	    (setq tab-width 2)))
 ;; (add-hook 'python-mode-hook 'jedi:setup )
 (put 'downcase-region 'disabled nil)
-
-;; Markdown hook
-(add-hook 'markdown-mode-hook
-	  (lambda ( )
-	    (visual-linemode)))
 
 ;; Restructed Text Mode Hooks
 (add-hook 'rst-mode-hook
 	  (lambda ( )
 	    (require 'sphinx-mode)
 	    (visual-line-mode)))
-
-;; inherit in the $PATH from the shell
-(exec-path-from-shell-initialize)
-
-;; follow instructions from
-;; https://www.emacswiki.org/emacs/MacOSXPlist
-;; edit PLIST files in emacs, maybe works?
-;; Allow editing of binary .plist files.
-(add-to-list 'jka-compr-compression-info-list
-             ["\\.plist$"
-              "converting text XML to binary plist"
-              "plutil"
-              ("-convert" "binary1" "-o" "-" "-")
-              "converting binary plist to text XML"
-              "plutil"
-              ("-convert" "xml1" "-o" "-" "-")
-              nil nil "bplist"])
-
-;;It is necessary to perform an update!
-(jka-compr-update)
-
-;; from
-;; https://stackoverflow.com/questions/350526/how-do-i-count-the-number-of-open-buffers-files-in-emacs
-;; automatically restore buffers on restart. May or may not work.
-(desktop-save-mode 1)
-
-
-(setq remote-file-name-inhibit-cache nil)
-(setq vc-ignore-dir-regexp
-      (format "%s\\|%s"
-	      vc-ignore-dir-regexp
-	      tramp-file-name-regexp))
-(setq tramp-verbose 1)
