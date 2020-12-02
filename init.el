@@ -22,7 +22,7 @@ There are two things you can do about this warning:
 ;; cargo cult #2, also from https://melpa.org/#/getting-started
 ;; also, emacs has REAL problems with https, so use http URLs if at all possible
 (add-to-list 'package-archives
-             '("melpa-stable" . "http://stable.melpa.org/packages/") t)
+             '("melpa-stable" . "https://stable.melpa.org/packages/") t)
 (package-refresh-contents)
 
 ;; from https://stackoverflow.com/a/26776276
@@ -71,10 +71,6 @@ There are two things you can do about this warning:
 ;; now setting up display to the following
 (mouse-wheel-mode 1)
 
-;; from https://stackoverflow.com/questions/350526/how-do-i-count-the-number-of-open-buffers-files-in-emacs
-;; automatically restore buffers on restart. May or may not work.
-(desktop-save-mode 1)
-
 ;; fucking pop-win
 (require 'popwin)
 (popwin-mode -1)
@@ -83,13 +79,11 @@ There are two things you can do about this warning:
 (setq transient-mark-mode t)
 (setq backup-inhibited t)
 
-;; follow this website: https://stackoverflow.com/questions/4053708/emacs-desktop-doesnt-remember-tramp-connections
-(setq desktop-buffers-not-to-save "^$" )
-
 ;;;;;; MODE SPECIFIC CHANGES ;;;;;;
 
 
-;; ;; add .bash_aliases to mode
+
+;; add .bash_aliases to mode
 (add-to-list 'auto-mode-alist '("\\.bash_aliases\\'" . sh-mode ) )
 (add-hook 'sh-mode-hook
 	  (lambda ( )
@@ -101,10 +95,10 @@ There are two things you can do about this warning:
 (require 'mercury-mode)
 (add-to-list 'auto-mode-alist '("\\.inp\\'" . mercury-mode ) )
 
-;; ;; R-modes, not working now, don't know when it will work again
-(require 'ess-site)
+;; R-modes, not working now, don't know when it will work again
+;; (require 'ess-site)
 
-;; ;; systemd-mode
+;; systemd-mode
 (require 'systemd)
 (add-to-list 'auto-mode-alist '("\\.service\\'" . systemd-mode))
 
@@ -130,12 +124,12 @@ There are two things you can do about this warning:
 ;; 	    (setq web-mode-markup-indent-offset 2)
 ;; 	    (setq web-mode-css-indent-offset 2) ) )
 
-;; ;; emacs-lisp mode
-;; (add-hook 'emacs-lisp-mode-hook
-;; 	  (lambda ()
-;; 	    (visual-line-mode)))
+;; emacs-lisp mode
+(add-hook 'emacs-lisp-mode-hook
+ 	  (lambda ()
+ 	    (visual-line-mode)))
 	    
-;; ;; make LaTeX act more like what I was used to in KILE
+;; make LaTeX act more like what I was used to in KILE
 ;; (require 'tex )
 (add-hook 'LaTeX-mode-hook
 	  (lambda ()
@@ -175,11 +169,11 @@ There are two things you can do about this warning:
 	 'reference))
       :latex )))
 
-;; ;; ares-mode
+;; ares-mode
 (require 'ares-mode)
 (add-to-list 'auto-mode-alist '("\\.ares$" . ares-mode))
 
-;; ;; Python Hook
+;; Python Hook
 (add-hook 'python-mode-hook
           (lambda ( )
 	    (visual-line-mode t)
@@ -197,35 +191,3 @@ There are two things you can do about this warning:
  	  (lambda ( )
  	    (require 'sphinx-mode)
  	    (visual-line-mode)))
-
-
-
-;; workgroups, taken from https://workgroups2.readthedocs.io/en/latest/guide/usage.html
-(require 'workgroups2 )
-;; Your settings here
-;;(setq wg-session-load-on-start t)    ; default: (not (daemonp))
-
-;; Change prefix key (before activating WG)
-(setq wg-prefix-key (kbd "C-c z"))
-
-;; Change workgroups session file
-(setq wg-session-file "~/.emacs.d/.emacs_workgroups")
-
-;; Set your own keyboard shortcuts to reload/save/switch WGs:
-;; "s" == "Super" or "Win"-key, "S" == Shift, "C" == Control
-(global-set-key (kbd "<pause>")     'wg-reload-session)
-(global-set-key (kbd "C-S-<pause>") 'wg-save-session)
-(global-set-key (kbd "s-z")         'wg-switch-to-workgroup)
-(global-set-key (kbd "s-/")         'wg-switch-to-previous-workgroup)
-
-(setq wg-emacs-exit-save-behavior           'ask)      ; Options: 'save 'ask nil
-(setq wg-workgroups-mode-exit-save-behavior 'ask)      ; Options: 'save 'ask nil
-;; Mode Line changes
-;; Display workgroups in Mode Line?
-(setq wg-mode-line-display-on t)          ; Default: (not (featurep 'powerline))
-(setq wg-flag-modified t)                 ; Display modified flags as well
-(setq wg-mode-line-decor-left-brace "["
-      wg-mode-line-decor-right-brace "]"  ; how to surround it
-      wg-mode-line-decor-divider ":")
-
-(workgroups-mode 1)   ; put this one at the bottom of .emacs
