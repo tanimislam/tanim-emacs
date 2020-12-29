@@ -187,6 +187,8 @@ There are two things you can do about this warning:
 (put 'downcase-region 'disabled nil)
 
 ;; Restructed Text Mode Hooks
+;(require 'jinja2-rst-mode )
+;(mmm-add-mode-ext-class 'rst-mode "\\.rst\\'" 'jinja2)
 (add-hook 'rst-mode-hook
  	  (lambda ( )
  	    (require 'sphinx-mode)

@@ -5,25 +5,25 @@
 ;; Created:  10 Apr 2015
 ;; Modified: 31 Mar 2016
 ;; Keywords: MERCURY major-mode
-
+        
 ;; Copyright (C) 2000, 2003 Scott Andrew Borton <scott@pp.htv.fi>
 ;; Copyright (C) 2015, Tanim Islam <islam5@llnl.gov>
-
+        
 ;; This program is free software; you can redistribute it and/or
 ;; modify it under the terms of the GNU General Public License as
 ;; published by the Free Software Foundation; either version 2 of
 ;; the License, or (at your option) any later version.
-
+        
 ;; This program is distributed in the hope that it will be
 ;; useful, but WITHOUT ANY WARRANTY; without even the implied
 ;; warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR
 ;; PURPOSE.  See the GNU General Public License for more details.
-
+        
 ;; You should have received a copy of the GNU General Public
 ;; License along with this program; if not, write to the Free
 ;; Software Foundation, Inc., 59 Temple Place, Suite 330, Boston,
 ;; MA 02111-1307 USA
-
+        
 ;; Commentary:
 ;; 
 ;; This mode is an example used in a tutorial about Emacs
@@ -36,11 +36,11 @@
     (define-key mercury-mode-map "\C-j" 'newline-and-indent)
     mercury-mode-map)
   "Keymap for Mercury major mode")
-
+    
 ;; filename suffixes to use mercury-mode
 (add-to-list 'auto-mode-alist '("\\.inp$" . mercury-mode))
 (add-to-list 'auto-mode-alist '("\\.INP$" . mercury-mode))
-
+        
 (defconst mercury-font-lock-keywords-1
   (list
    ;; These define the beginning and end of each MERCURY entity definition
@@ -61,14 +61,14 @@
 
 (defvar mercury-font-lock-keywords mercury-font-lock-keywords-3
   "Default highlighting expressions for Mercury mode.")
-
+        
 (defun mercury-indent-line ()
   "Indent current line as Mercury code."
   (interactive)
   (beginning-of-line)
   (let ((case-fold-search nil))
     (if (bobp)
-        (indent-line-to 0)		   ; First line is always non-indented
+        (indent-line-to 0)	   ; First line is always non-indented
       (let ((not-indented t) cur-indent)
         (if (looking-at "^[ \t]*\\<\\(end_\\(?:Adjacent_\\(?:Cell\\|Domain\\|Region\\|Surface\\)\\|C\\(?:_Function\\|ell\\(?:_\\(?:\\(?:Glob\\|Loc\\)al\\)\\)?\\|ontrol\\|riticality\\(?:_Probability\\)?\\)\\|D\\(?:iagnostic\\|o\\(?:main\\(?:_Global\\)?\\)?\\)\\|E\\(?:vent\\|xt\\(?:ernal_Points\\|inction_Probability\\)\\)\\|F\\(?:rom_Material\\|ull_Reaction\\)\\|Geometry\\|I\\(?:dentifier\\|n\\(?:s\\(?:cribed_Material\\|ide_Internal_Interface\\)\\|ternal_Interface\\)\\)\\|Material\\(?:_\\(?:Based_Volume_Source\\|Composition\\)\\)?\\|Origin_Material\\|P\\(?:article\\|rocessor\\|urpose\\|ython_Function\\)\\|R\\(?:a\\(?:diograph\\|ndom_Number_Generator\\)\\|e\\(?:action_\\(?:Number\\|Type\\)\\|gion\\|sponse_Defined\\)\\)\\|S\\(?:\\(?:our\\|\\(?:tatic_S\\)?urfa\\)ce\\)\\|T\\(?:N_\\(?:Reaction\\|Source\\)\\|a\\(?:g\\|lly\\|rget_ZA\\)\\|emplates\\|ime\\|o_Material\\)\\|Unit\\|Variance_Reduction\\|a\\(?:ctivate_template_lattice\\|djacent_\\(?:cell\\|domain\\|region\\|surface\\)\\|ngle\\|t\\(?:begin\\|converged\\|exit\\)\\)\\|b\\(?:alance\\|c\\|set\\)\\|c\\(?:_function\\|ell\\(?:_\\(?:\\(?:glob\\|loc\\)al\\)\\)?\\|g_decomposition\\|on\\(?:\\(?:stant_noda\\|tro\\)l\\)\\|r\\(?:iticality\\(?:_probability\\)?\\|oss_section_mods\\)\\|ycle\\)\\|d\\(?:iagnostic\\|o\\(?:main\\(?:_global\\)?\\)?\\)\\|e\\(?:nergy\\|v\\(?:al\\|ent\\)\\|xt\\(?:ernal_points\\|inction_probability\\)\\)\\|f\\(?:i\\(?:eld\\|le\\)\\|rom_material\\|u\\(?:ll_reaction\\|nctional\\)\\)\\|g\\(?:eometry\\|raphics_mesh\\)\\|history\\|i\\(?:dentifier\\|n\\(?:s\\(?:cribed_material\\|ide_internal_interface\\)\\|ternal_\\(?:interface\\|points\\)\\)\\|so\\)\\|l\\(?:ast_event\\|eakage\\|ink\\)\\|m\\(?:at\\(?:erial\\(?:_\\(?:based_volume_source\\|composition\\)\\)?\\)?\\|esh\\|o\\(?:d\\|ve[xyz]?\\)\\)\\|nu\\(?:_multiplier\\|m_emit_response\\)\\|o\\(?:perator\\|rigin_material\\|utput\\)\\|p\\(?:art\\(?:icle\\)?\\|o\\(?:int\\|larization\\)\\|rocessor\\|urpose\\|y\\(?:_history\\|thon_\\(?:function\\|\\(?:nod\\|zon\\)al\\)\\)\\)\\|r\\(?:a\\(?:diograph\\|n\\(?:dom_number_generator\\|ge\\(?:_m\\(?:ax\\|in\\)\\)?\\)\\)\\|e\\(?:act\\(?:_mod\\|ion_\\(?:number\\|type\\)\\)\\|gion\\|s\\(?:ponse\\(?:_defined\\)?\\|ult\\)\\)\\|ng\\|otate[xyz]?\\)\\|s\\(?:et\\|ource\\|pectrum\\|rc\\|ta\\(?:ndard\\|tic_surface\\)\\|urf\\(?:ace\\)?\\)\\|t\\(?:a\\(?:lly\\|rget_za\\|[gl]\\)\\|emplates?\\|ime\\|mpl\\|n_\\(?:reaction\\|source\\)\\|o_material\\)\\|unit\\|v\\(?:a\\(?:lue_response\\|riance_reduction\\)\\|r\\)\\)\\|mc_e\\(?:lse\\|ndif\\)\\)\\>")
 					; If the line we are looking at is the end of a block, then decrease the indentation
@@ -97,7 +97,7 @@
         (if cur-indent
 	    (indent-line-to cur-indent)
 	  (indent-line-to 0)))))) ; If we didn't see an indentation hint, then allow no indentation
-
+        
 (defvar mercury-mode-syntax-table
   (let ((mercury-mode-syntax-table (make-syntax-table)))
     ;; This is added so entity names with underscores can be more easily parsed
@@ -107,7 +107,7 @@
     (modify-syntax-entry ?\n "> b" mercury-mode-syntax-table)
     mercury-mode-syntax-table)
   "Syntax table for mercury-mode")
-
+        
 (defun mercury-mode ()
   (interactive)
   (kill-all-local-variables)
@@ -120,12 +120,12 @@
   (setq major-mode 'mercury-mode)
   (setq mode-name "Mercury")
   (run-hooks 'mercury-mode-hook))
-
+        
 ;; add these hooks for mercury-mode
 (add-hook 'mercury-mode-hook
 	  ( lambda()
 	    (setq indent-tabs-mode t)
 	    (setq tab-width 2)
 	    (set (make-local-variable 'comment-start) "#")))
-
+    
 (provide 'mercury-mode)
