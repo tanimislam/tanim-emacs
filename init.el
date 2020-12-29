@@ -191,3 +191,6 @@ There are two things you can do about this warning:
  	  (lambda ( )
  	    (require 'sphinx-mode)
  	    (visual-line-mode)))
+
+;; emojify, following instructions from https://github.com/iqbalansari/emacs-emojify#with-use-package
+(add-hook 'after-init-hook 'global-emojify-mode)
