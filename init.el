@@ -99,8 +99,8 @@ There are two things you can do about this warning:
 ;; (require 'ess-site)
 
 ;; systemd-mode
-(require 'systemd)
-(add-to-list 'auto-mode-alist '("\\.service\\'" . systemd-mode))
+;;(require 'systemd)
+;;(add-to-list 'auto-mode-alist '("\\.service\\'" . systemd-mode))
 
 ;; ;; css-mode
 ;; (autoload 'css-mode "css-mode")
