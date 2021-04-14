@@ -94,6 +94,7 @@
 ;; ;; mercury mode
 (require 'mercury-mode)
 (add-to-list 'auto-mode-alist '("\\.inp\\'" . mercury-mode ) )
+(add-to-list 'auto-mode-alist '("\\.INP\\'" . mercury-mode ) )
 
 ;; R-modes, not working now, don't know when it will work again
 ;; (require 'ess-site)
