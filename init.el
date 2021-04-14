@@ -2,28 +2,28 @@
 
 ;; add in the packages
 ;; cargo cult from https://melpa.org/#/getting-started
-(require 'package)
-(let* ((no-ssl (and (memq system-type '(windows-nt ms-dos))
-                    (not (gnutls-available-p))))
-       (proto (if no-ssl "http" "https")))
-  (when no-ssl (warn "\
-Your version of Emacs does not support SSL connections,
-which is unsafe because it allows man-in-the-middle attacks.
-There are two things you can do about this warning:
-1. Install an Emacs version that does support SSL and be safe.
-2. Remove this warning from your init file so you won't see it again."))
-  (add-to-list 'package-archives (cons "melpa" (concat proto "://melpa.org/packages/")) t)
+;;(require 'package)
+;;(let* ((no-ssl (and (memq system-type '(windows-nt ms-dos))
+;;                    (not (gnutls-available-p))))
+;;       (proto (if no-ssl "http" "https")))
+;;  (when no-ssl (warn "\
+;;Your version of Emacs does not support SSL connections,
+;;which is unsafe because it allows man-in-the-middle attacks.
+;;There are two things you can do about this warning:
+;;1. Install an Emacs version that does support SSL and be safe.
+;;2. Remove this warning from your init file so you won't see it again."))
+;;  (add-to-list 'package-archives (cons "melpa" (concat proto "://melpa.org/packages/")) t)
   ;; Comment/uncomment this line to enable MELPA Stable if desired.  See `package-archive-priorities`
   ;; and `package-pinned-packages`. Most users will not need or want to do this.
   ;;(add-to-list 'package-archives (cons "melpa-stable" (concat proto "://stable.melpa.org/packages/")) t)
-  )
-(package-initialize)
+;;  )
+;;(package-initialize)
 
 ;; cargo cult #2, also from https://melpa.org/#/getting-started
 ;; also, emacs has REAL problems with https, so use http URLs if at all possible
-(add-to-list 'package-archives
-             '("melpa-stable" . "https://stable.melpa.org/packages/") t)
-(package-refresh-contents)
+;;(add-to-list 'package-archives
+;;             '("melpa-stable" . "https://stable.melpa.org/packages/") t)
+;;(package-refresh-contents)
 
 ;; from https://stackoverflow.com/a/26776276
 ;; mapping mac os X key commands
@@ -99,8 +99,8 @@ There are two things you can do about this warning:
 ;; (require 'ess-site)
 
 ;; systemd-mode
-(require 'systemd)
-(add-to-list 'auto-mode-alist '("\\.service\\'" . systemd-mode))
+;;(require 'systemd)
+;;(add-to-list 'auto-mode-alist '("\\.service\\'" . systemd-mode))
 
 ;; ;; css-mode
 ;; (autoload 'css-mode "css-mode")
@@ -192,7 +192,22 @@ There are two things you can do about this warning:
 (add-hook 'rst-mode-hook
  	  (lambda ( )
  	    (require 'sphinx-mode)
- 	    (visual-line-mode)))
+ 	    (visual-line-mode t)))
 
 ;; emojify, following instructions from https://github.com/iqbalansari/emacs-emojify#with-use-package
-(add-hook 'after-init-hook 'global-emojify-mode)
+;; (add-hook 'after-init-hook 'global-emojify-mode)
+
+;; got this unwrap-line emacs command from emacswiki.org/emacs/UnwrapLine
+(defun unwrap-line ()
+  "Remove all newlines until we get to two consecutive ones.
+    Or until we reach the end of the buffer.
+    Great for unwrapping quotes before sending them on IRC."
+  (interactive)
+  (let ((start (point))
+	(end (copy-marker (or (search-forward "\n\n" nil t)
+			      (point-max))))
+	(fill-column (point-max)))
+    (fill-region start end)
+    (goto-char end)
+    (newline)
+    (goto-char start)))
