@@ -83,8 +83,8 @@
 
 
 
-;; add .bash_aliases to mode
-(add-to-list 'auto-mode-alist '("\\.bash_aliases\\'" . sh-mode ) )
+;; add .bash_aliases to mode and auto-wrap 
+(add-to-list 'auto-mode-alist '("\\.bash_aliases$" . sh-mode ) )
 (add-hook 'sh-mode-hook
 	  (lambda ( )
 	    (visual-line-mode t)))
@@ -93,8 +93,12 @@
 ;; ;; (require 'wpdl-mode)
 ;; ;; mercury mode
 (require 'mercury-mode)
-(add-to-list 'auto-mode-alist '("\\.inp\\'" . mercury-mode ) )
-(add-to-list 'auto-mode-alist '("\\.INP\\'" . mercury-mode ) )
+(add-to-list 'auto-mode-alist '("\\.inp$" . mercury-mode ) )
+(add-to-list 'auto-mode-alist '("\\.INP$" . mercury-mode ) )
+(add-hook 'mercury-mode-hook
+	  (lambda ()
+	    (visual-line-mode t)))
+
 
 ;; R-modes, not working now, don't know when it will work again
 ;; (require 'ess-site)
@@ -170,9 +174,13 @@
 	 'reference))
       :latex )))
 
-;; ares-mode
+;; ares-mode and hook
 (require 'ares-mode)
 (add-to-list 'auto-mode-alist '("\\.ares$" . ares-mode))
+(add-to-list 'auto-mode-alist '("\\.cale$" . ares-mode))
+(add-hook 'ares-mode-hook
+	  (lambda ()
+	    (visual-line-mode t)))
 
 ;; Python Hook
 (add-hook 'python-mode-hook
