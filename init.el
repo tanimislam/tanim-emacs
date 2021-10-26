@@ -46,14 +46,12 @@
 ;; set default font
 ;; (set-frame-font "Liberation Mono 11")
 (setq default-frame-alist
-      '((font . "Ubuntu Mono 11")
-	(height . 45 )
+      '((height . 45 )
 	(width . 80 ) ) )
 (setq initial-frame-alist
-      '((font . "Ubuntu Mono 11")
-	(height . 45 )
+      '((height . 45 )
 	(width . 80 ) ) )
-(add-to-list 'initial-frame-alist '(font . "Ubuntu Mono 11"))
+;;(add-to-list 'initial-frame-alist '(font . "Ubuntu Mono 11"))
 
 ;; add elisp to path
 (add-to-list 'load-path "~/.xemacs")
