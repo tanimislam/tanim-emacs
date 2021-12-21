@@ -218,3 +218,14 @@
     (goto-char end)
     (newline)
     (goto-char start)))
+
+;; yorick stuff
+(autoload 'yorick "yorick" "see yorick.el" t)
+(autoload 'yorick-mode "yorick" "see yorick.el" t)
+(autoload 'ysh "yorick" "see yorick.el" t)
+(autoload 'yssh "yorick" "see yorick.el" t)
+(autoload 'yutil-setup "yorick" "see yorick.el" nil)
+(if (assoc "\\.i$" auto-mode-alist)
+    (setcdr (assoc "\\.i$" auto-mode-alist) 'yorick-mode)
+  (setq auto-mode-alist (append '(("\\.i$" . yorick-mode))
+				auto-mode-alist)))
