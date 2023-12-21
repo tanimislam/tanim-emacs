@@ -13,9 +13,9 @@
 ;;1. Install an Emacs version that does support SSL and be safe.
 ;;2. Remove this warning from your init file so you won't see it again."))
 ;;  (add-to-list 'package-archives (cons "melpa" (concat proto "://melpa.org/packages/")) t)
-  ;; Comment/uncomment this line to enable MELPA Stable if desired.  See `package-archive-priorities`
-  ;; and `package-pinned-packages`. Most users will not need or want to do this.
-  ;;(add-to-list 'package-archives (cons "melpa-stable" (concat proto "://stable.melpa.org/packages/")) t)
+;; Comment/uncomment this line to enable MELPA Stable if desired.  See `package-archive-priorities`
+;; and `package-pinned-packages`. Most users will not need or want to do this.
+;;(add-to-list 'package-archives (cons "melpa-stable" (concat proto "://stable.melpa.org/packages/")) t)
 ;;  )
 ;;(package-initialize)
 
@@ -229,3 +229,12 @@
     (setcdr (assoc "\\.i$" auto-mode-alist) 'yorick-mode)
   (setq auto-mode-alist (append '(("\\.i$" . yorick-mode))
 				auto-mode-alist)))
+
+;; go-mode hooks, need to install go-mode by running "M-X package-install go-mode"
+;; gotten from https://www.gnu.org/software/emacs/manual/html_node/emacs/Comparing-Files.html
+;; modifications: indent-tabs-mode 0
+(add-hook 'go-mode-hook
+	  (lambda ()
+            (add-hook 'before-save-hook 'gofmt-before-save)
+            (setq tab-width 2)
+            (setq indent-tabs-mode 0)))
